@@ -211,3 +211,61 @@ Remember: use source links only. Do not upload audio.
 Shravanam should behave like Goodreads for devotional lectures, not Spotify.
 
 The lecture remains on external websites. Shravanam only tracks progress, notes, lists, streaks, and analytics.
+
+## Optional Step — Add Bigger Lecture Catalog
+
+If your site is showing only one or a few lectures, it means you have only inserted small sample data.
+
+To add the larger starter catalog:
+
+1. Open Supabase.
+2. Go to SQL Editor.
+3. Open the file:
+
+```txt
+database/seed_rigorous_catalog.sql
+```
+
+4. Copy all SQL from that file.
+5. Run it in Supabase.
+6. Refresh your website.
+
+This will add many starter lecture metadata rows across multiple categories and speakers.
+
+The exact audio remains outside Shravanam. Replace placeholder external links with exact ISKCON Desire Tree, YouTube, Google Drive, Archive.org, SoundCloud, or temple website links.
+
+## Login Requirement
+
+In this version, Google login is required before users can access the lecture library and personal tracker pages.
+
+Public:
+
+```txt
+/
+/login
+/auth/callback
+```
+
+Login required:
+
+```txt
+/lectures
+/lectures/[id]
+/dashboard
+/lists
+/profile
+/admin
+```
+
+
+## V3 Source Catalog Setup
+
+To use the ISKCON Desire Tree Audio source hub:
+
+1. Deploy the updated code.
+2. Go to Supabase → SQL Editor.
+3. Run `database/schema.sql` first if not already done.
+4. Run `database/seed_idt_source_catalog.sql`.
+5. Visit `/sources` after Google login.
+
+The source hub opens external archive folders only. Shravanam does not play or host the audio.

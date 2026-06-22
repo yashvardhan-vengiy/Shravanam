@@ -99,3 +99,65 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ## Important rule
 
 Shravanam does not host or play lectures. It helps devotees organize, open, track, complete, and reflect on devotional hearing from trusted external sources such as ISKCON Desire Tree, YouTube, Google Drive, Archive.org, SoundCloud, and temple websites.
+
+## Version 2 login behavior
+
+The app now requires Google login for:
+
+- `/lectures`
+- `/lectures/[id]`
+- `/dashboard`
+- `/lists`
+- `/profile`
+- `/admin`
+
+Only the homepage and login page are public.
+
+## More rigorous starter catalog
+
+The first schema file contains only very small sample data. To add a bigger starter catalog, run this after `database/schema.sql`:
+
+```sql
+-- Open database/seed_rigorous_catalog.sql and run it in Supabase SQL Editor
+```
+
+This adds a broad catalog across Bhagavad Gita, Srimad Bhagavatam, Japa, Kirtan, Bhakti Sastri, Festivals, Youth, Leadership, Counseling, and more.
+
+Important: the starter catalog uses general external source placeholders. Replace `source_url` or `youtube_url` with exact lecture URLs as you collect them.
+
+## Bulk import template
+
+Use this CSV as a format reference:
+
+```txt
+database/import_template.csv
+```
+
+You can import lecture metadata into Supabase using the Table Editor import feature, or add lectures from the `/admin` page.
+
+
+## V3 — ISKCON Desire Tree Audio Source Hub
+
+This version adds a dedicated `/sources` page and a larger seed file based on the public folder-style structure of `https://audio.iskcondesiretree.com/`.
+
+Shravanam still does **not** play, stream, upload, scrape, or host audio. It only opens external source folders in a new tab and lets users track progress privately.
+
+After running `database/schema.sql`, also run:
+
+```sql
+-- Supabase SQL Editor
+-- open and run this file:
+database/seed_idt_source_catalog.sql
+```
+
+This adds source-tracking cards for:
+
+- Srila Prabhupada archive
+- ISKCON Swamis sections
+- ISKCON Prabhujis sections
+- ISKCON Matajis section
+- ISKCON Chowpatty sections/yearly archive cards
+- ISKCON Kanpur and other center source cards
+- Bhagavad Gita Class and Srimad Bhagavatam Class external sites
+
+Important: these entries are external source/project records, not internally hosted audio files.

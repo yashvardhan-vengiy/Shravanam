@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+import Link from "next/link";
 import LectureCard from "@/components/LectureCard";
 import { createClient } from "@/lib/supabase/server";
 
@@ -11,6 +13,8 @@ export default async function LecturesPage({ searchParams }: { searchParams?: Pr
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  if (!user) redirect("/login");
 
   let query = supabase.from("lectures").select("*").order("created_at", { ascending: false });
 
@@ -42,7 +46,8 @@ export default async function LecturesPage({ searchParams }: { searchParams?: Pr
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
             <h1 className="text-4xl font-extrabold">Lecture Library</h1>
-            <p className="mt-2 text-gray-600">Open external lectures and track your hearing manually.</p>
+            <p className="mt-2 text-gray-600">Open external sources such as ISKCON Desire Tree Audio and track your hearing manually.</p>
+            <Link href="/sources" className="mt-4 inline-block rounded-xl border border-orange-600 bg-white px-4 py-2 text-sm font-semibold text-orange-700 hover:bg-orange-50">Open Source Hub</Link>
           </div>
 
           <form className="flex flex-col gap-2 sm:flex-row">

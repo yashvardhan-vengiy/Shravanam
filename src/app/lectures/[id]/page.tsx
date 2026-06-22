@@ -10,6 +10,8 @@ export default async function LectureDetailPage({ params }: { params: Promise<{ 
     data: { user },
   } = await supabase.auth.getUser();
 
+  if (!user) redirect("/login");
+
   const { data: lecture, error } = await supabase
     .from("lectures")
     .select("*")
@@ -18,14 +20,12 @@ export default async function LectureDetailPage({ params }: { params: Promise<{ 
 
   if (error || !lecture) notFound();
 
-  const { data: progress } = user
-    ? await supabase
-        .from("user_lecture_progress")
-        .select("*")
-        .eq("user_id", user.id)
-        .eq("lecture_id", id)
-        .maybeSingle()
-    : { data: null };
+  const { data: progress } = await supabase
+    .from("user_lecture_progress")
+    .select("*")
+    .eq("user_id", user.id)
+    .eq("lecture_id", id)
+    .maybeSingle();
 
   const lectureLink = lecture.source_url || lecture.youtube_url;
 
@@ -47,7 +47,7 @@ export default async function LectureDetailPage({ params }: { params: Promise<{ 
           <div className="mt-6 flex flex-wrap gap-3">
             {lectureLink ? (
               <a href={lectureLink} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700">
-                Open Lecture
+                {lecture.source_name?.toLowerCase().includes("iskcon desire tree") ? "Open on ISKCON Desire Tree" : "Open Lecture"}
               </a>
             ) : (
               <button className="rounded-xl bg-gray-300 px-5 py-3 font-semibold text-gray-700" disabled>
@@ -58,16 +58,7 @@ export default async function LectureDetailPage({ params }: { params: Promise<{ 
         </section>
 
         <section className="mt-8">
-          {user ? (
-            <ReflectionForm userId={user.id} lectureId={lecture.id} existingProgress={progress} />
-          ) : (
-            <div className="rounded-3xl bg-white p-6 text-center shadow-sm">
-              <p className="text-gray-700">Login to save progress and write reflections.</p>
-              <form action={async () => { "use server"; redirect("/login"); }}>
-                <button className="mt-4 rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white">Login</button>
-              </form>
-            </div>
-          )}
+          <ReflectionForm userId={user.id} lectureId={lecture.id} existingProgress={progress} />
         </section>
       </div>
     </main>

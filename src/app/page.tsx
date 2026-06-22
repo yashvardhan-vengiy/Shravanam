@@ -15,14 +15,11 @@ export default function HomePage() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-700">
-            Organize devotional lectures, open trusted external sources, mark your
-            hearing progress, build consistency, and reflect deeply.
+            Organize devotional lectures from sources like ISKCON Desire Tree Audio, open trusted external folders, mark your hearing progress, build consistency, and reflect deeply.
           </p>
 
           <div className="mt-6 rounded-2xl border border-orange-200 bg-white p-5 text-sm leading-6 text-gray-700 shadow-sm">
-            Shravanam does not host or play lectures. It helps devotees organize,
-            track, complete, and reflect on devotional hearing from trusted
-            external sources.
+            Shravanam does not host or play lectures. It works as a private dashboard above trusted external sources such as the ISKCON Desire Tree Audio archive. Open the original source, hear there, then return here to track completion, lists, streaks, and reflections.
           </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -34,10 +31,10 @@ export default function HomePage() {
             </Link>
 
             <Link
-              href="/lectures"
+              href="/sources"
               className="rounded-xl border border-orange-600 bg-white px-6 py-3 font-semibold text-orange-700 hover:bg-orange-50"
             >
-              Browse Lectures
+              Login & Open Source Hub
             </Link>
           </div>
         </div>
@@ -58,7 +55,7 @@ export default function HomePage() {
               <FeatureCard icon={<ListChecks />} title="Track Completion" text="Manual status and progress." />
               <FeatureCard icon={<BarChart3 />} title="See Analytics" text="Hours, streaks, categories." />
               <FeatureCard icon={<Heart />} title="Reflect Deeply" text="Notes and realizations." />
-              <FeatureCard icon={<BookOpen />} title="Open Sources" text="ISKCON Desire Tree, YouTube, more." />
+              <FeatureCard icon={<BookOpen />} title="Open Sources" text="ISKCON Desire Tree Audio, YouTube, more." />
             </div>
           </div>
         </div>

@@ -139,7 +139,7 @@ export default function LectureCard({ lecture, userId }: { lecture: Lecture; use
 
       <div className="mt-5 flex flex-wrap gap-2">
         <button onClick={openLecture} className="rounded-xl bg-orange-600 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-700">
-          Open Lecture
+          {lecture.source_name?.toLowerCase().includes("iskcon desire tree") ? "Open on ISKCON Desire Tree" : "Open Lecture"}
         </button>
         <button onClick={() => updateProgress("Heard", 100)} className="rounded-xl border px-4 py-2 text-sm font-semibold hover:bg-gray-50">
           Mark as Heard

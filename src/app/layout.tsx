@@ -24,6 +24,7 @@ async function Navbar() {
 
         <div className="hidden items-center gap-5 text-sm font-medium text-gray-700 md:flex">
           <Link href="/lectures" className="hover:text-orange-700">Lectures</Link>
+          <Link href="/sources" className="hover:text-orange-700">Source Hub</Link>
           <Link href="/dashboard" className="hover:text-orange-700">Dashboard</Link>
           <Link href="/lists" className="hover:text-orange-700">Lists</Link>
           <Link href="/profile" className="hover:text-orange-700">Profile</Link>
