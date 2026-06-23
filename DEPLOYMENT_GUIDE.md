@@ -269,3 +269,34 @@ To use the ISKCON Desire Tree Audio source hub:
 5. Visit `/sources` after Google login.
 
 The source hub opens external archive folders only. Shravanam does not play or host the audio.
+
+---
+
+# V4 Vercel npm install fix
+
+If Vercel shows:
+
+```txt
+npm error Exit handler never called!
+Error: Command "npm install" exited with 1
+```
+
+use V4 or make sure your GitHub repo has:
+
+```txt
+vercel.json
+package.json with packageManager pnpm@10.12.1
+no package-lock.json
+```
+
+In Vercel Project Settings → Build and Deployment, the install/build commands can remain as project defaults because `vercel.json` now provides:
+
+```json
+{
+  "framework": "nextjs",
+  "installCommand": "corepack enable && pnpm install --no-frozen-lockfile",
+  "buildCommand": "pnpm build"
+}
+```
+
+Then redeploy without build cache.
